@@ -1,4 +1,4 @@
-# 02022023-dang-quang-khai-ios
+# Simple project using Swift, RealmDB, Alamofire
 
 
 
