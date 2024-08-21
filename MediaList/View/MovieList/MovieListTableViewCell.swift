@@ -8,12 +8,15 @@
 import UIKit
 
 class MovieListTableViewCell: UITableViewCell {
-    @IBOutlet weak var displayView: UIView!
-    @IBOutlet weak var artWorkImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var genreLabel: UILabel!
-    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet private weak var displayView: UIView!
+    @IBOutlet private weak var artWorkImageView: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var priceLabel: UILabel!
+    @IBOutlet private weak var genreLabel: UILabel!
+    @IBOutlet private weak var favoriteButton: UIButton!
+    
+    var onTapFavorite: (()-> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.backgroundColor = .black
@@ -21,7 +24,7 @@ class MovieListTableViewCell: UITableViewCell {
         favoriteButton.setTitle("", for: .normal)
         favoriteButton.setImage(UIImage(named: "ic_heart_gray"), for: .normal)
         favoriteButton.setImage(UIImage(named: "ic_heart_red"), for: .selected)
-        favoriteButton.backgroundColor = .lightGray
+        favoriteButton.backgroundColor = .clear
     }
     
     override func prepareForReuse() {
@@ -35,7 +38,11 @@ class MovieListTableViewCell: UITableViewCell {
         self.titleLabel.text = data.name
         self.genreLabel.text = data.genre
         self.priceLabel.text = data.price
-        self.favoriteButton.isSelected = true       // Add logic later
+        self.favoriteButton.isSelected = data.isFavorite
         self.artWorkImageView.loadImage(from: data.imageSmall)
+    }
+    
+    @IBAction func onTapFavoriteButton(_ sender: UIButton) {
+        self.onTapFavorite?()
     }
 }

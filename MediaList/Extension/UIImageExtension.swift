@@ -11,11 +11,6 @@ import Alamofire
 import AlamofireImage
 
 extension UIImageView {
-    func imageWithURL(url: String) -> UIImage {
-        
-        return UIImage()
-    }
-    
     func loadImage(from urlString: String) {
         guard let url = URL(string: urlString) else {
             return
